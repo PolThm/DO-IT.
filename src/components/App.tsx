@@ -1,16 +1,16 @@
 import React from 'react';
 import './App.css';
 import Header from "./Header";
-import NewComponent from "./NewComponent";
+import TodosSection from "./TodosSection";
 
 const App: React.FC = () => {
   return (
-    <React.Fragment>
+    <div className="container">
       <Header/>
-      <NewComponent/>
+      <TodosSection/>
 
       <div className="h-screen"/>
-    </React.Fragment>
+    </div>
   );
 };
 

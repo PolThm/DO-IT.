@@ -1,6 +1,6 @@
 import React from 'react';
 
-const NewComponent: React.FC = () => {
+const Todo: React.FC = () => {
   return (
     <div className="">
 
@@ -8,4 +8,4 @@ const NewComponent: React.FC = () => {
   );
 };
 
-export default NewComponent;
+export default Todo;
