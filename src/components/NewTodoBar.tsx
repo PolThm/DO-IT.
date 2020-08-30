@@ -16,10 +16,10 @@ const NewTodoBar: React.FC = () => {
 
   return (
     <div className="flex items-center border-solid border border-gray-700 shadow-md">
-      <div className="py-3 px-4 border-r border-black">
+      <div className="py-4 px-4 border-r border-black">
         {fa}
       </div>
-      <input className="py-1 pl-3 outline-none w-full italic" type="text" name="name" value={""} onChange={handleChange} placeholder="Add a new Todo..."/>
+      <input className="pl-3 outline-none w-full italic" type="text" name="name" value={""} onChange={handleChange} placeholder="Add a new Todo..."/>
     </div>
   );
 };

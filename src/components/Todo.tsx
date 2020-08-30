@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 
-const Todo: React.FC = () => {
+const Todo: React.FC<{todo:string}> = (props) => {
   const [todoDone, setTodoDone] = useState(false);
   const [todoHover, setTodoHover] = useState(false);
 
@@ -16,18 +16,18 @@ const Todo: React.FC = () => {
     todoClassName += 'line-through text-gray-400'
   }
 
-  let todoCross: any = null;
+  let todoCross: React.DetailedHTMLProps<React.HTMLAttributes<HTMLElement>, HTMLElement> | undefined;
   if (todoHover) {
-    todoCross = <i className="fas fa-times text-red-400 mx-4 cursor-pointer"/>
+    todoCross = <i className="fas fa-times text-red-400 mr-4 cursor-pointer"/>
   }
 
   return (
     <div className="flex items-center justify-between w-full border-solid border border-gray-700 border-t-0" onMouseEnter={() => setTodoHover(true)} onMouseLeave={() => setTodoHover(false)}>
       <div className="flex items-center">
-        <div className="py-3 px-4">
+        <div className="py-4 px-4">
           {fa}
         </div>
-        <p className={todoClassName}>Write my first Todo</p>
+        <p className={todoClassName}>{props.todo}</p>
       </div>
       {todoCross}
     </div>
