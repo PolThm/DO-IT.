@@ -15,7 +15,7 @@ const NewTodoBar: React.FC = () => {
   }
 
   return (
-    <div className="flex items-center border-solid border border-gray-700 shadow">
+    <div className="flex items-center border-solid border border-gray-700 shadow-md">
       <div className="py-3 px-4 border-r border-black">
         {fa}
       </div>
