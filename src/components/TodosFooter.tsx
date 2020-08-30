@@ -4,19 +4,20 @@ const TodosFooter: React.FC = () => {
   const [filter, setFilter] = useState("All");
 
   const baseButtonFilterClassName = "mx-1 px-2 py-1 cursor-pointer border border-transparent hover:border-gray-300";
+  const selectedButtonFilterClassName = `${baseButtonFilterClassName} border-gray-700 hover:border-gray-700`;
   let allButtonFilterClassName = baseButtonFilterClassName;
   let activeButtonFilterClassName = baseButtonFilterClassName;
   let completedButtonFilterClassName = baseButtonFilterClassName;
   if (filter === "All") {
-    allButtonFilterClassName = `${baseButtonFilterClassName} border-gray-700 hover:border-gray-700`;
+    allButtonFilterClassName = selectedButtonFilterClassName;
   } else if (filter === "Active") {
-    activeButtonFilterClassName = `${baseButtonFilterClassName} border-gray-700 hover:border-gray-700`;
+    activeButtonFilterClassName = selectedButtonFilterClassName;
   } else if (filter ==="Completed") {
-    completedButtonFilterClassName = `${baseButtonFilterClassName} border-gray-700 hover:border-gray-700`;
+    completedButtonFilterClassName = selectedButtonFilterClassName;
   }
 
   return (
-    <div className="py-2 px-4 flex items-center justify-between w-full border-solid border border-gray-700 border-t-0">
+    <div className="py-2 px-4 flex items-center justify-between w-full border-solid border border-gray-700 border-t-0 text-sm">
       <p>3 items left</p>
       <div className="flex">
         <div className={allButtonFilterClassName}>
