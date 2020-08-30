@@ -1,11 +1,19 @@
 import React, {useState} from 'react';
 
-const handleChange = () => {
-
-};
-
 const NewTodoBar: React.FC = () => {
+  const [newTodo, setNewTodo] = useState("");
   const [allTodoDone, setAllTodoDone] = useState(false);
+
+  const handleSubmitNewTodo = (event: any) => {
+    event.preventDefault();
+    setNewTodo("")
+
+  };
+
+  let inputClassName = "px-3 outline-none w-full ";
+  if (newTodo === "") {
+    inputClassName += "italic";
+  }
 
   let fa: React.DetailedHTMLProps<React.HTMLAttributes<HTMLElement>, HTMLElement>;
   if (!allTodoDone) {
@@ -19,7 +27,9 @@ const NewTodoBar: React.FC = () => {
       <div className="py-4 px-4 border-r border-black">
         {fa}
       </div>
-      <input className="pl-3 outline-none w-full italic" type="text" name="name" value={""} onChange={handleChange} placeholder="Add a new Todo..."/>
+      <form className="w-full" onSubmit={handleSubmitNewTodo}>
+        <input className={inputClassName} type="text" name="newTodo" value={newTodo} onChange={(event) => setNewTodo(event.target.value)} placeholder="Add a new Todo..."/>
+      </form>
     </div>
   );
 };
