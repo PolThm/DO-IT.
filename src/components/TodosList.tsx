@@ -17,7 +17,7 @@ const TodosList: React.FC = () => {
   let listOfTodos = todosData.map((todo) => {
     return (
       <Todo
-        key={todo.task}
+        key={`${todo.task} ${Date.now()}`}
         task={todo.task}
       />
     )
