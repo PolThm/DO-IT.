@@ -1,12 +1,15 @@
-import React, {useState} from 'react';
+import React, {useState, useContext} from 'react';
+import {DoItContext} from "../context";
 
 const NewTodoBar: React.FC = () => {
   const [newTodo, setNewTodo] = useState("");
   const [allTodoDone, setAllTodoDone] = useState(false);
+  const {addNewTodo}: any = useContext(DoItContext);
 
   const handleSubmitNewTodo = (event: any) => {
     event.preventDefault();
-    setNewTodo("")
+    addNewTodo(newTodo);
+    setNewTodo("");
 
   };
 

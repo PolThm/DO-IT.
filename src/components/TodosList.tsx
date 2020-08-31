@@ -3,12 +3,10 @@ import Todo from "./Todo";
 
 import {DoItContext} from "../context";
 
-const TodosList: React.FC = (props: any) => {
+const TodosList: React.FC = () => {
   const doItContext = useContext(DoItContext);
 
   const {todosData}: any = doItContext;
-
-  console.log(todosData);
 
   const listOfTodos = todosData.map((todo: any) => {
     return (

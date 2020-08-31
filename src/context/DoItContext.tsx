@@ -1,9 +1,8 @@
-import React, { createContext, useState } from "react";
-import PropTypes from "prop-types";
+import React, {createContext, PropsWithChildren, useState} from "react";
 
 export const Context = createContext({});
 
-export const Provider = (props: any) => {
+export const Provider = (props: PropsWithChildren< any >) => {
   // Initial values are obtained from the props
   const {
     todosData: initialTodosData,
@@ -15,7 +14,7 @@ export const Provider = (props: any) => {
 
   const addNewTodo = (task: string) => {
     const newTodo = { id: Date.now(), task: task };
-    setTodosData(todosData.push(newTodo));
+    setTodosData([...todosData, newTodo]);
   };
 
   // Make the context object:
@@ -30,12 +29,3 @@ export const Provider = (props: any) => {
 };
 
 export const { Consumer } = Context;
-
-Provider.propTypes = {
-  children: PropTypes.node,
-  todosData: PropTypes.array,
-};
-
-Provider.defaultProps = {
-  todosData: []
-};
