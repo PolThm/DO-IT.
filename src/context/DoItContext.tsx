@@ -32,6 +32,7 @@ export const Provider = (props: any) => {
 export const { Consumer } = Context;
 
 Provider.propTypes = {
+  children: PropTypes.node,
   todosData: PropTypes.array,
 };
 
