@@ -1,12 +1,31 @@
 import React from 'react';
 import Todo from "./Todo";
 
+let todosData = [
+  {
+    task: "Write my first Todo"
+  },
+  {
+    task: "Try the features"
+  },
+  {
+    task: "Remove the completed Todos"
+  },
+];
+
+let listOfTodos = todosData.map((todo) => {
+  return (
+    <Todo
+      key={todo.task}
+      task={todo.task}
+    />
+  )
+});
+
 const TodosList: React.FC = () => {
   return (
     <div className="">
-      <Todo todo={"Write my first Todo"}/>
-      <Todo todo={"Try the features"}/>
-      <Todo todo={"Remove the completed Todos"}/>
+      {listOfTodos}
     </div>
   );
 };

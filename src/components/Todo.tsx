@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 
-const Todo: React.FC<{todo:string}> = (props) => {
+const Todo: React.FC<{task:string}> = (props) => {
   const [todoDone, setTodoDone] = useState(false);
   const [todoHover, setTodoHover] = useState(false);
 
@@ -27,7 +27,7 @@ const Todo: React.FC<{todo:string}> = (props) => {
         <div className="py-4 px-4">
           {fa}
         </div>
-        <p className={todoClassName}>{props.todo}</p>
+        <p className={todoClassName}>{props.task}</p>
       </div>
       {todoCross}
     </div>
