@@ -11,7 +11,7 @@ export const Provider = (props: PropsWithChildren< any >) => {
 
   // Use State to keep the values
   const [todosAll, setTodosAll] = useState(initialTodosAll);
-  const [completedTodos, setCompletedTodos] = useState();
+  const [completedTodos, setCompletedTodos] = useState([]);
   const [filter, setFilter] = useState("All");
 
   const addNewTodo = (task: string) => {
@@ -19,10 +19,12 @@ export const Provider = (props: PropsWithChildren< any >) => {
     setTodosAll([...todosAll, newTodo]);
   };
 
-  const completeTodo = (id: number) => {
-    const completedTodo = {id: id};
-    setCompletedTodos([...completedTodos, completedTodo]);
+  const completeTodo = (id: number, task: string) => {
+    const completedTodo = {id: id, task: task};
+    setCompletedTodos<>([...completedTodos, completedTodo]);
   };
+
+  console.log(completedTodos);
 
   const changeFilter = (filter: string) => {
     setFilter(filter);
@@ -45,4 +47,4 @@ export const Provider = (props: PropsWithChildren< any >) => {
   return <Context.Provider value={doItContext}>{children}</Context.Provider>;
 };
 
-export const { Consumer } = Context;
+export const {Consumer} = Context;

@@ -14,6 +14,7 @@ const TodosList: React.FC = () => {
         return (
           <Todo
             key={todo.id}
+            id={todo.id}
             task={todo.task}
           />
         )
@@ -26,6 +27,7 @@ const TodosList: React.FC = () => {
         return (
           <Todo
             key={todo.id}
+            id={todo.id}
             task={todo.task}
           />
         )

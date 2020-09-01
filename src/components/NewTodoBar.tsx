@@ -10,7 +10,6 @@ const NewTodoBar: React.FC = () => {
     event.preventDefault();
     addNewTodo(newTodo);
     setNewTodo("");
-
   };
 
   let inputClassName = "px-3 outline-none w-full ";

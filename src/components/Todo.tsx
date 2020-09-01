@@ -1,12 +1,15 @@
-import React, {useState} from 'react';
+import React, {useContext, useState} from 'react';
+import {DoItContext} from "../context";
 
-const Todo: React.FC<{task:string}> = (props) => {
+
+const Todo: React.FC<{id:number, task:string}> = (props) => {
   const [todoDone, setTodoDone] = useState(false);
   const [todoHover, setTodoHover] = useState(false);
+  const {completeTodo}: any = useContext(DoItContext);
 
   let fa: React.DetailedHTMLProps<React.HTMLAttributes<HTMLElement>, HTMLElement>;
   if (!todoDone) {
-    fa = <i className="far fa-circle cursor-pointer text-gray-400" onClick={() => setTodoDone(true)}/>;
+    fa = <i className="far fa-circle cursor-pointer text-gray-400" onClick={() => {setTodoDone(true); completeTodo(props.id, props.task);}}/>;
   } else {
     fa = <i className="far fa-check-circle cursor-pointer text-black" onClick={() => setTodoDone(false)} />
   }
