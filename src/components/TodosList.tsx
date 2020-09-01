@@ -4,7 +4,7 @@ import Todo from "./Todo";
 
 const TodosList: React.FC = () => {
   const doItContext = useContext(DoItContext);
-  const {todosAll, completedTodos, filter}: any = doItContext;
+  const {todosAll, activeTodos, completedTodos, filter}: any = doItContext;
 
   let listOfTodos;
 
@@ -21,7 +21,17 @@ const TodosList: React.FC = () => {
         )
       });
   } else if (filter === "Active") {
-
+    listOfTodos =
+      activeTodos.map((todo: any) => {
+        return (
+          <Todo
+            key={todo.id}
+            id={todo.id}
+            task={todo.task}
+            completed={todo.completed}
+          />
+        )
+      });
   } else if (filter === "Completed") {
     listOfTodos =
       completedTodos.map((todo: any) => {

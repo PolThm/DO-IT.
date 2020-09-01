@@ -4,7 +4,7 @@ import {DoItContext} from "../context";
 
 const Todo: React.FC<{id: number, task: string, completed: boolean}> = (props) => {
   const [todoHover, setTodoHover] = useState(false);
-  const {completeTodo, activeTodo}: any = useContext(DoItContext);
+  const {completeTodo, activeTodo, removeTodo}: any = useContext(DoItContext);
 
   let fa: React.DetailedHTMLProps<React.HTMLAttributes<HTMLElement>, HTMLElement>;
   if (!props.completed) {
@@ -20,7 +20,7 @@ const Todo: React.FC<{id: number, task: string, completed: boolean}> = (props) =
 
   let todoCross: React.DetailedHTMLProps<React.HTMLAttributes<HTMLElement>, HTMLElement> | undefined;
   if (todoHover) {
-    todoCross = <i className="fas fa-times text-red-400 mr-4 cursor-pointer"/>
+    todoCross = <i className="fas fa-times text-red-400 mr-4 cursor-pointer" onClick={() => removeTodo(props.id)}/>
   }
 
   return (

@@ -13,6 +13,7 @@ export const Provider = (props: PropsWithChildren< any >) => {
   // Use State to keep the values
   const [todosAll, setTodosAll] = useState(initialTodosAll);
   const [completedTodos, setCompletedTodos] = useState([]);
+  const [activeTodos, setActiveTodos] = useState(initialTodosAll);
   const [filter, setFilter] = useState("All");
 
   const addNewTodo = (task: string) => {
@@ -22,14 +23,24 @@ export const Provider = (props: PropsWithChildren< any >) => {
 
   const completeTodo = (id: number, task: string) => {
     const completedTodo = {id: id, task: task, completed: true};
+    setActiveTodos<>(activeTodos.filter(todo => todo.id !== completedTodo.id));
     setCompletedTodos<>([...completedTodos, completedTodo]);
     setTodosAll<>([...todosAll.filter(todo => todo.id !== completedTodo.id), completedTodo]);
+
   };
 
   const activeTodo = (id: number, task: string) => {
-    const completedTodo = {id: id, task: task, completed: false};
-    setCompletedTodos<>(completedTodos.filter(todo => todo.id !== completedTodo.id));
-    setTodosAll<>([completedTodo, ...todosAll.filter(todo => todo.id !== completedTodo.id)]);
+    const activatedTodo = {id: id, task: task, completed: false};
+    setTodosAll<>([activatedTodo, ...todosAll.filter(todo => todo.id !== activatedTodo.id)]);
+    setActiveTodos<>([activatedTodo, ...activeTodos.filter(todo => todo.id !== activatedTodo.id)]);
+    setCompletedTodos<>(completedTodos.filter(todo => todo.id !== activatedTodo.id));
+  };
+
+  const removeTodo = (id: number) => {
+    const removedTodo = {id:id};
+    setTodosAll<>(todosAll.filter(todo => todo.id !== removedTodo.id));
+    setActiveTodos<>(activeTodos.filter(todo => todo.id !== removedTodo.id));
+    setCompletedTodos<>(completedTodos.filter(todo => todo.id !== removedTodo.id));
   };
 
   console.log(completedTodos);
@@ -41,15 +52,14 @@ export const Provider = (props: PropsWithChildren< any >) => {
   // Make the context object:
   const doItContext: any = {
     todosAll,
-    setTodosAll,
+    activeTodos,
     completedTodos,
-    setCompletedTodos,
     filter,
-    setFilter,
     addNewTodo,
     completeTodo,
+    activeTodo,
+    removeTodo,
     changeFilter,
-    activeTodo
   };
 
   // pass the value in provider and return
