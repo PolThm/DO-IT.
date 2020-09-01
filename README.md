@@ -2,6 +2,7 @@ Link to the project: https://do-it.pol-thomas.com/  (-> will be soon available !
 
 Main technologies used for the project:
 - React JS
+- Typescript
 - Hooks
 - Context
 - Tailwind CSS
