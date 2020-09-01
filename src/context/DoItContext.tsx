@@ -21,14 +21,14 @@ export const Provider = (props: PropsWithChildren< any >) => {
   };
 
   const completeTodo = (id: number, task: string) => {
-    const completedTodo = {id: id, task: task};
+    const completedTodo = {id: id, task: task, completed: true};
     setCompletedTodos<>([...completedTodos, completedTodo]);
+    setTodosAll<>([...todosAll.filter(todo => todo.id !== completedTodo.id), completedTodo]);
   };
 
   const activeTodo = (id: number, task: string) => {
-    const completedTodo = {id: id, task: task};
-    setCompletedTodos<>(completedTodos.filter(todo => todo !== completedTodo));
-    // setCompletedTodos<>(_.omit(completedTodos, completedTodo));
+    const completedTodo = {id: id, task: task, completed: false};
+    setCompletedTodos<>(completedTodos.filter(todo => todo.id !== completedTodo.id));
   };
 
   console.log(completedTodos);

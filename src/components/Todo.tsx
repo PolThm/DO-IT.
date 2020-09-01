@@ -3,19 +3,18 @@ import {DoItContext} from "../context";
 
 
 const Todo: React.FC<{id: number, task: string, completed: boolean}> = (props) => {
-  const [todoDone, setTodoDone] = useState(false);
   const [todoHover, setTodoHover] = useState(false);
   const {completeTodo, activeTodo}: any = useContext(DoItContext);
 
   let fa: React.DetailedHTMLProps<React.HTMLAttributes<HTMLElement>, HTMLElement>;
-  if (!todoDone) {
-    fa = <i className="far fa-circle cursor-pointer text-gray-400" onClick={() => {setTodoDone(true); completeTodo(props.id, props.task);}}/>;
+  if (!props.completed) {
+    fa = <i className="far fa-circle cursor-pointer text-gray-400" onClick={() => {completeTodo(props.id, props.task, props.completed);}}/>;
   } else {
-    fa = <i className="far fa-check-circle cursor-pointer text-black" onClick={() => {setTodoDone(false); activeTodo(props.id, props.task);}}/>
+    fa = <i className="far fa-check-circle cursor-pointer text-black" onClick={() => {activeTodo(props.id, props.task, props.completed);}}/>
   }
 
   let todoClassName: string = "px-3 ";
-  if (todoDone) {
+  if (props.completed) {
     todoClassName += 'line-through text-gray-400'
   }
 
