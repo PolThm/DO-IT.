@@ -6,11 +6,9 @@ const TodosFooter: React.FC = () => {
   const {completedTodos, activeTodos, filter, changeFilter, removeTodo}: any = doItContext;
 
   const clearAllCompleted = () => {
-    completedTodos.map((todo: any) => {
-      return (
+    for (const todo of completedTodos) {
         removeTodo(todo.id)
-      )
-    })
+    }
   };
 
   const baseButtonFilterClassName = "mx-1 px-2 py-1 hidden sm:block cursor-pointer border rounded border-transparent hover:border-gray-300 focus:outline-none";
