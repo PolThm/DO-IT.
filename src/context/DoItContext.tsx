@@ -1,4 +1,5 @@
 import React, {createContext, PropsWithChildren, useState} from "react";
+// import _ from 'lodash';
 
 export const Context = createContext({});
 
@@ -15,13 +16,19 @@ export const Provider = (props: PropsWithChildren< any >) => {
   const [filter, setFilter] = useState("All");
 
   const addNewTodo = (task: string) => {
-    const newTodo = {id: Date.now(), task: task};
+    const newTodo = {id: Date.now(), task: task, completed: false};
     setTodosAll([...todosAll, newTodo]);
   };
 
   const completeTodo = (id: number, task: string) => {
     const completedTodo = {id: id, task: task};
     setCompletedTodos<>([...completedTodos, completedTodo]);
+  };
+
+  const activeTodo = (id: number, task: string) => {
+    const completedTodo = {id: id, task: task};
+    setCompletedTodos<>(completedTodos.filter(todo => todo !== completedTodo));
+    // setCompletedTodos<>(_.omit(completedTodos, completedTodo));
   };
 
   console.log(completedTodos);
@@ -40,7 +47,8 @@ export const Provider = (props: PropsWithChildren< any >) => {
     setFilter,
     addNewTodo,
     completeTodo,
-    changeFilter
+    changeFilter,
+    activeTodo
   };
 
   // pass the value in provider and return

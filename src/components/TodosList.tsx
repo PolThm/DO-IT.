@@ -16,6 +16,7 @@ const TodosList: React.FC = () => {
             key={todo.id}
             id={todo.id}
             task={todo.task}
+            completed={todo.completed}
           />
         )
       });
@@ -29,6 +30,7 @@ const TodosList: React.FC = () => {
             key={todo.id}
             id={todo.id}
             task={todo.task}
+            completed={todo.completed}
           />
         )
       });

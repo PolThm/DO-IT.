@@ -4,12 +4,21 @@ import {DoItContext} from "../context";
 const NewTodoBar: React.FC = () => {
   const [newTodo, setNewTodo] = useState("");
   const [allTodoDone, setAllTodoDone] = useState(false);
-  const {addNewTodo}: any = useContext(DoItContext);
+  const {todosAll, addNewTodo, completeTodo}: any = useContext(DoItContext);
 
   const handleSubmitNewTodo = (event: any) => {
     event.preventDefault();
     addNewTodo(newTodo);
     setNewTodo("");
+  };
+
+  const completeAllTodos = () => {
+    setAllTodoDone(true);
+    todosAll.map((todo: any) => {
+      return (
+        completeTodo(todo.id, todo.task)
+      )
+    })
   };
 
   let inputClassName = "px-3 outline-none w-full ";
@@ -19,7 +28,7 @@ const NewTodoBar: React.FC = () => {
 
   let fa: React.DetailedHTMLProps<React.HTMLAttributes<HTMLElement>, HTMLElement>;
   if (!allTodoDone) {
-    fa = <i className="fas fa-chevron-down cursor-pointer text-gray-400" onClick={() => setAllTodoDone(true)}/>;
+    fa = <i className="fas fa-chevron-down cursor-pointer text-gray-400" onClick={completeAllTodos}/>;
   } else {
     fa = <i className="fas fa-chevron-down cursor-pointer text-black" onClick={() => setAllTodoDone(false)} />
   }

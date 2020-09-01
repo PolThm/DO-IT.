@@ -1,11 +1,9 @@
-import React, {useContext, useState} from 'react';
+import React, {useContext} from 'react';
 import {DoItContext} from "../context";
 
 const TodosFooter: React.FC = () => {
   const doItContext = useContext(DoItContext);
   const {todosAll, filter, changeFilter}: any = doItContext;
-
-  // const [filter, setFilter] = useState("All");
 
   const baseButtonFilterClassName = "mx-1 px-2 py-1 hidden sm:block cursor-pointer border rounded border-transparent hover:border-gray-300 focus:outline-none";
   const selectedButtonFilterClassName = `${baseButtonFilterClassName} border-gray-700 hover:border-gray-700`;
