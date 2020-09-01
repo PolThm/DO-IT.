@@ -5,7 +5,7 @@ import Header from "./Header";
 import TodosSection from "./TodosSection";
 
 const App: React.FC = () => {
-const todosData = [
+const todosAll = [
   {
     id: 1,
     task: "Write my first Todo"
@@ -22,7 +22,7 @@ const todosData = [
 
   return (
     <div className="container">
-      <DoItContextProvider todosData={todosData}>
+      <DoItContextProvider todosAll={todosAll}>
         <Header/>
         <TodosSection/>
       </DoItContextProvider>

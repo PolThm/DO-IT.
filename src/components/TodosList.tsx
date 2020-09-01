@@ -1,21 +1,36 @@
 import React, {useContext} from 'react';
-import Todo from "./Todo";
-
 import {DoItContext} from "../context";
+import Todo from "./Todo";
 
 const TodosList: React.FC = () => {
   const doItContext = useContext(DoItContext);
+  const {todosAll, completedTodos, filter}: any = doItContext;
 
-  const {todosData}: any = doItContext;
+  let listOfTodos;
 
-  const listOfTodos = todosData.map((todo: any) => {
-    return (
-      <Todo
-        key={todo.id}
-        task={todo.task}
-      />
-    )
-  });
+  if (filter === "All") {
+    listOfTodos =
+      todosAll.map((todo: any) => {
+        return (
+          <Todo
+            key={todo.id}
+            task={todo.task}
+          />
+        )
+      });
+  } else if (filter === "Active") {
+
+  } else if (filter === "Completed") {
+    listOfTodos =
+      completedTodos.map((todo: any) => {
+        return (
+          <Todo
+            key={todo.id}
+            task={todo.task}
+          />
+        )
+      });
+  }
 
   return (
     <div className="">

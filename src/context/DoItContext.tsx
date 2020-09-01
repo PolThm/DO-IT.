@@ -5,23 +5,40 @@ export const Context = createContext({});
 export const Provider = (props: PropsWithChildren< any >) => {
   // Initial values are obtained from the props
   const {
-    todosData: initialTodosData,
+    todosAll: initialTodosAll,
     children
   } = props;
 
   // Use State to keep the values
-  const [todosData, setTodosData] = useState(initialTodosData);
+  const [todosAll, setTodosAll] = useState(initialTodosAll);
+  const [completedTodos, setCompletedTodos] = useState();
+  const [filter, setFilter] = useState("All");
 
   const addNewTodo = (task: string) => {
-    const newTodo = { id: Date.now(), task: task };
-    setTodosData([...todosData, newTodo]);
+    const newTodo = {id: Date.now(), task: task};
+    setTodosAll([...todosAll, newTodo]);
+  };
+
+  const completeTodo = (id: number) => {
+    const completedTodo = {id: id};
+    setCompletedTodos([...completedTodos, completedTodo]);
+  };
+
+  const changeFilter = (filter: string) => {
+    setFilter(filter);
   };
 
   // Make the context object:
   const doItContext: any = {
-    todosData,
-    setTodosData,
-    addNewTodo
+    todosAll,
+    setTodosAll,
+    completedTodos,
+    setCompletedTodos,
+    filter,
+    setFilter,
+    addNewTodo,
+    completeTodo,
+    changeFilter
   };
 
   // pass the value in provider and return

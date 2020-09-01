@@ -8,7 +8,7 @@ const Todo: React.FC<{task:string}> = (props) => {
   if (!todoDone) {
     fa = <i className="far fa-circle cursor-pointer text-gray-400" onClick={() => setTodoDone(true)}/>;
   } else {
-    fa = <i className="fas fa-check-circle cursor-pointer text-black" onClick={() => setTodoDone(false)} />
+    fa = <i className="far fa-check-circle cursor-pointer text-black" onClick={() => setTodoDone(false)} />
   }
 
   let todoClassName: string = "px-3 ";
