@@ -37,13 +37,12 @@ export const Provider = (props: PropsWithChildren< any >) => {
   };
 
   const removeTodo = (id: number) => {
-    const removedTodo = {id:id};
-    setTodosAll<>(todosAll.filter(todo => todo.id !== removedTodo.id));
-    setActiveTodos<>(activeTodos.filter(todo => todo.id !== removedTodo.id));
-    setCompletedTodos<>(completedTodos.filter(todo => todo.id !== removedTodo.id));
+    setTodosAll<>(todosAll.filter(todo => todo.id !== id));
+    setActiveTodos<>(activeTodos.filter(todo => todo.id !== id));
+    setCompletedTodos<>(completedTodos.filter(todo => todo.id !== id));
   };
 
-  console.log(completedTodos);
+  // console.log(completedTodos);
 
   const changeFilter = (filter: string) => {
     setFilter(filter);
