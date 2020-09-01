@@ -1,3 +1,13 @@
+Link to the project: https://do-it.pol-thomas.com/  (-> will be soon available !)
+
+Main technologies used for the project:
+- React JS
+- Hooks
+- Context
+- Tailwind CSS
+
+----------------------------------------------------------------------------------------------------
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
