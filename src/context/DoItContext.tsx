@@ -26,7 +26,6 @@ export const Provider = (props: PropsWithChildren< any >) => {
     setActiveTodos<>(activeTodos.filter(todo => todo.id !== completedTodo.id));
     setCompletedTodos<>([...completedTodos, completedTodo]);
     setTodosAll<>([...todosAll.filter(todo => todo.id !== completedTodo.id), completedTodo]);
-
   };
 
   const activeTodo = (id: number, task: string) => {
