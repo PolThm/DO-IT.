@@ -5,7 +5,7 @@ import TodosFooter from "./TodosFooter";
 
 const TodosSection: React.FC = () => {
   return (
-    <div className="">
+    <div className="mb-16">
       <NewTodoBar/>
       <TodosList/>
       <TodosFooter/>
