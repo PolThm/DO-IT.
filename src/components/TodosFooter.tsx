@@ -1,9 +1,8 @@
-import React, {useContext} from 'react';
-import {DoItContext} from "../context";
+import React from 'react';
+import { useDoItContent } from "../context";
 
 const TodosFooter: React.FC = () => {
-  const doItContext = useContext(DoItContext);
-  const {completedTodos, activeTodos, filter, changeFilter, removeTodo}: any = doItContext;
+  const {completedTodos, activeTodos, filter, changeFilter, removeTodo} = useDoItContent();
 
   const clearAllCompleted = () => {
     for (const todo of completedTodos) {

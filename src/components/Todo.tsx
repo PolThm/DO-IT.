@@ -1,19 +1,19 @@
-import React, {useContext, useState} from 'react';
-import {DoItContext} from "../context";
+import React, { useState } from 'react';
+import { useDoItContent } from "../context";
 
 
 const Todo: React.FC<{id: number, task: string, completed: boolean}> = (props) => {
   const [todoHover, setTodoHover] = useState(false);
-  const {completeTodo, activeTodo, removeTodo}: any = useContext(DoItContext);
+  const {completeTodo, activeTodo, removeTodo} = useDoItContent();
 
   let fa: React.DetailedHTMLProps<React.HTMLAttributes<HTMLElement>, HTMLElement>;
   if (!props.completed) {
-    fa = <i className="far fa-circle cursor-pointer text-gray-400" onClick={() => {completeTodo(props.id, props.task, props.completed);}}/>;
+    fa = <i className="far fa-circle cursor-pointer text-gray-400" onClick={() => {completeTodo(props.id, props.task /*, props.completed*/);}}/>;
   } else {
-    fa = <i className="far fa-check-circle cursor-pointer text-black" onClick={() => {activeTodo(props.id, props.task, props.completed);}}/>
+    fa = <i className="far fa-check-circle cursor-pointer text-black" onClick={() => {activeTodo(props.id, props.task /*, props.completed*/);}}/>
   }
 
-  let todoClassName: string = "px-3 ";
+  let todoClassName = "px-3 ";
   if (props.completed) {
     todoClassName += 'line-through text-gray-400'
   }

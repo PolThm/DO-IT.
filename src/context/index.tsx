@@ -1,5 +1,4 @@
 export {
-  Context as DoItContext,
   Provider as DoItContextProvider,
-  Consumer as DoItContextConsumer
+  useDoItContent
 } from "./DoItContext";

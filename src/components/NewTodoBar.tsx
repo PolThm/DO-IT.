@@ -1,12 +1,12 @@
-import React, {useState, useContext} from 'react';
-import {DoItContext} from "../context";
+import React, { FormEventHandler, useState } from 'react';
+import { useDoItContent } from "../context";
 
 const NewTodoBar: React.FC = () => {
   const [newTodo, setNewTodo] = useState("");
   const [allTodosDone, setAllTodosDone] = useState(false);
-  const {activeTodos, completedTodos, addNewTodo, completeTodo, activeTodo}: any = useContext(DoItContext);
+  const {activeTodos, completedTodos, addNewTodo, completeTodo, activeTodo} = useDoItContent();
 
-  const handleSubmitNewTodo = (event: any) => {
+  const handleSubmitNewTodo:FormEventHandler<HTMLFormElement> = (event) => {
     event.preventDefault();
     addNewTodo(newTodo);
     setNewTodo("");
@@ -15,12 +15,12 @@ const NewTodoBar: React.FC = () => {
   const completeAllTodos = () => {
     if (!allTodosDone) {
       setAllTodosDone(true);
-      activeTodos.map((todo: any) => {
+      activeTodos.map((todo) => {
         return (completeTodo(todo.id, todo.task))
       })
     } else {
       setAllTodosDone(false);
-      completedTodos.map((todo: any) => {
+      completedTodos.map((todo) => {
         return (activeTodo(todo.id, todo.task))
       })
     }
