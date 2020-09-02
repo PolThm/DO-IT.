@@ -23,22 +23,22 @@ export const Provider = (props: PropsWithChildren< any >) => {
 
   const completeTodo = (id: number, task: string) => {
     const completedTodo = {id: id, task: task, completed: true};
-    setActiveTodos<>(activeTodos.filter(todo => todo.id !== completedTodo.id));
-    setCompletedTodos<>([...completedTodos, completedTodo]);
-    setTodosAll<>([...todosAll.filter(todo => todo.id !== completedTodo.id), completedTodo]);
+    setActiveTodos(activeTodos.filter(todo => todo.id !== completedTodo.id));
+    setCompletedTodos([...completedTodos, completedTodo]);
+    setTodosAll([...todosAll.filter(todo => todo.id !== completedTodo.id), completedTodo]);
   };
 
   const activeTodo = (id: number, task: string) => {
     const activatedTodo = {id: id, task: task, completed: false};
-    setTodosAll<>([activatedTodo, ...todosAll.filter(todo => todo.id !== activatedTodo.id)]);
-    setActiveTodos<>([activatedTodo, ...activeTodos.filter(todo => todo.id !== activatedTodo.id)]);
-    setCompletedTodos<>(completedTodos.filter(todo => todo.id !== activatedTodo.id));
+    setTodosAll([activatedTodo, ...todosAll.filter(todo => todo.id !== activatedTodo.id)]);
+    setActiveTodos([activatedTodo, ...activeTodos.filter(todo => todo.id !== activatedTodo.id)]);
+    setCompletedTodos(completedTodos.filter(todo => todo.id !== activatedTodo.id));
   };
 
   const removeTodo = (id: number) => {
-    setTodosAll<>(todosAll.filter(todo => todo.id !== id));
-    setActiveTodos<>(activeTodos.filter(todo => todo.id !== id));
-    setCompletedTodos<>(completedTodos.filter(todo => todo.id !== id));
+    setTodosAll(todosAll.filter(todo => todo.id !== id));
+    setActiveTodos(activeTodos.filter(todo => todo.id !== id));
+    setCompletedTodos(completedTodos.filter(todo => todo.id !== id));
   };
 
   // console.log(completedTodos);
