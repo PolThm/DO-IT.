@@ -1,7 +1,5 @@
 import React, { createContext, PropsWithChildren, useContext, useState } from "react";
 
-// import _ from 'lodash';
-
 interface Todo {
   id: number;
   task: string;
