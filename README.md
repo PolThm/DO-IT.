@@ -1,4 +1,4 @@
-Link to the project: https://do-it.pol-thomas.com/  (-> will be soon available !)
+Link to the project: https://do-it.pol-thomas.com/
 
 Main technologies used for the project:
 - React JS
