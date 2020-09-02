@@ -32,7 +32,7 @@ const initialTodos = [
 
 const defaultValue: Context = {
   todosAll: initialTodos,
-  activeTodos: initialTodos,
+  activeTodos: [],
   completedTodos: [],
   filter: "All",
   addNewTodo: willThrow,
