@@ -3,8 +3,9 @@ import { useDoItContent } from "../context";
 
 const NewTodoBar: React.FC = () => {
   const [newTodo, setNewTodo] = useState("");
-  const [allTodosDone, setAllTodosDone] = useState(false);
-  const {activeTodos, completedTodos, addNewTodo, completeTodo, activeTodo} = useDoItContent();
+  const {todosAll, addNewTodo, completeTodo, activeTodo} = useDoItContent();
+
+  const allTodosDone = todosAll.every(todo => todo.completed);
 
   const handleSubmitNewTodo:FormEventHandler<HTMLFormElement> = (event) => {
     event.preventDefault();
@@ -12,15 +13,13 @@ const NewTodoBar: React.FC = () => {
     setNewTodo("");
   };
 
-  const completeAllTodos = () => {
+  const toggleAllTodos = () => {
     if (!allTodosDone) {
-      setAllTodosDone(true);
-      activeTodos.map((todo) => {
+      todosAll.map((todo) => {
         return (completeTodo(todo.id, todo.task))
       })
     } else {
-      setAllTodosDone(false);
-      completedTodos.map((todo) => {
+      todosAll.map((todo) => {
         return (activeTodo(todo.id, todo.task))
       })
     }
@@ -33,9 +32,9 @@ const NewTodoBar: React.FC = () => {
 
   let fa: React.DetailedHTMLProps<React.HTMLAttributes<HTMLElement>, HTMLElement>;
   if (!allTodosDone) {
-    fa = <i className="fas fa-chevron-down cursor-pointer text-gray-400" onClick={completeAllTodos}/>;
+    fa = <i className="fas fa-chevron-down cursor-pointer text-gray-400" onClick={toggleAllTodos}/>;
   } else {
-    fa = <i className="fas fa-chevron-down cursor-pointer text-black" onClick={() => setAllTodosDone(false)} />
+    fa = <i className="fas fa-chevron-down cursor-pointer text-black" onClick={toggleAllTodos} />
   }
 
   return (

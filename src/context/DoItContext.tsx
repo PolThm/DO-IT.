@@ -53,8 +53,10 @@ export const Provider = (props: PropsWithChildren<{}>) => {
 
   // Use State to keep the values
   const [todosAll, setTodosAll] = useState(defaultValue.todosAll);
-  const [completedTodos, setCompletedTodos] = useState(defaultValue.completedTodos);
-  const [activeTodos, setActiveTodos] = useState(defaultValue.activeTodos);
+
+  const activeTodos = todosAll.filter(todo => !todo.completed);
+  const completedTodos = todosAll.filter(todo => todo.completed);
+
   const [filter, setFilter] = useState(defaultValue.filter);
 
   const addNewTodo: Context['addNewTodo'] = (task) => {
@@ -64,22 +66,36 @@ export const Provider = (props: PropsWithChildren<{}>) => {
 
   const completeTodo: Context['completeTodo'] = (id, task) => {
     const completedTodo = {id: id, task: task, completed: true};
-    setActiveTodos(activeTodos.filter(todo => todo.id !== completedTodo.id));
-    setCompletedTodos([...completedTodos, completedTodo]);
-    setTodosAll([...todosAll.filter(todo => todo.id !== completedTodo.id), completedTodo]);
+
+    setTodosAll(currentTodosAll => {
+      const completedTodoIndex = currentTodosAll.findIndex(todo => todo.id === id);
+      if(completedTodoIndex < 0) {
+        throw new Error('Index not found');
+      }
+
+      const newTodosAll = [...currentTodosAll];
+      newTodosAll[completedTodoIndex] = completedTodo;
+      return newTodosAll;
+    });
   };
 
   const activeTodo: Context['activeTodo'] = (id, task) => {
     const activatedTodo = {id: id, task: task, completed: false};
-    setTodosAll([activatedTodo, ...todosAll.filter(todo => todo.id !== activatedTodo.id)]);
-    setActiveTodos([activatedTodo, ...activeTodos.filter(todo => todo.id !== activatedTodo.id)]);
-    setCompletedTodos(completedTodos.filter(todo => todo.id !== activatedTodo.id));
+
+    setTodosAll(currentTodosAll => {
+      const activatedTodoIndex = currentTodosAll.findIndex(todo => todo.id === id);
+      if(activatedTodoIndex < 0) {
+        throw new Error('Index not found');
+      }
+
+      const newTodosAll = [...currentTodosAll];
+      newTodosAll[activatedTodoIndex] = activatedTodo;
+      return newTodosAll;
+    })
   };
 
   const removeTodo: Context['removeTodo'] = (id) => {
-    setTodosAll(todosAll.filter(todo => todo.id !== id));
-    setActiveTodos(activeTodos.filter(todo => todo.id !== id));
-    setCompletedTodos(completedTodos.filter(todo => todo.id !== id));
+    setTodosAll(currentTodos => currentTodos.filter(todo => todo.id !== id));
   };
 
   // console.log(completedTodos);
