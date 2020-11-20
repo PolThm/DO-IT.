@@ -17,6 +17,7 @@ interface Context {
   completeTodo: (id: number, task: string) => void;
   activeTodo: (id: number, task: string) => void;
   removeTodo: (id: number) => void;
+  editTodo: (id: number, task: string) => void;
   changeFilter: (filter: Filter) => void;
 }
 
@@ -39,6 +40,7 @@ const defaultValue: Context = {
   completeTodo: willThrow,
   activeTodo: willThrow,
   removeTodo: willThrow,
+  editTodo: willThrow,
   changeFilter: willThrow
 };
 
@@ -51,11 +53,10 @@ export const Provider = (props: PropsWithChildren<{}>) => {
 
   // Use State to keep the values
   const [todosAll, setTodosAll] = useState(defaultValue.todosAll);
+  const [filter, setFilter] = useState(defaultValue.filter)
 
   const activeTodos = todosAll.filter(todo => !todo.completed);
   const completedTodos = todosAll.filter(todo => todo.completed);
-
-  const [filter, setFilter] = useState(defaultValue.filter);
 
   const addNewTodo: Context['addNewTodo'] = (task) => {
     const newTodo = {id: Date.now(), task: task, completed: false};
@@ -65,9 +66,9 @@ export const Provider = (props: PropsWithChildren<{}>) => {
   const completeTodo: Context['completeTodo'] = (id, task) => {
     const completedTodo = {id: id, task: task, completed: true};
 
-    setTodosAll(currentTodosAll => {
+    setTodosAll((currentTodosAll) => {
       const completedTodoIndex = currentTodosAll.findIndex(todo => todo.id === id);
-      if(completedTodoIndex < 0) {
+      if (completedTodoIndex < 0) {
         throw new Error('Index not found');
       }
 
@@ -80,9 +81,9 @@ export const Provider = (props: PropsWithChildren<{}>) => {
   const activeTodo: Context['activeTodo'] = (id, task) => {
     const activatedTodo = {id: id, task: task, completed: false};
 
-    setTodosAll(currentTodosAll => {
+    setTodosAll((currentTodosAll) => {
       const activatedTodoIndex = currentTodosAll.findIndex(todo => todo.id === id);
-      if(activatedTodoIndex < 0) {
+      if (activatedTodoIndex < 0) {
         throw new Error('Index not found');
       }
 
@@ -96,7 +97,19 @@ export const Provider = (props: PropsWithChildren<{}>) => {
     setTodosAll(currentTodos => currentTodos.filter(todo => todo.id !== id));
   };
 
-  // console.log(completedTodos);
+  const editTodo: Context['editTodo'] = (id, task) => {
+    setTodosAll((currentTodosAll) => {
+      const editedTodoIndex = currentTodosAll.findIndex(todo => todo.id === id);
+      if (editedTodoIndex < 0) {
+        throw new Error('Index not found');
+      }
+
+      const newTodosAll = [...currentTodosAll];
+      newTodosAll[editedTodoIndex].task = task;
+      return newTodosAll;
+    })
+
+  }
 
   const changeFilter: Context['changeFilter'] = (filter) => {
     setFilter(filter);
@@ -112,6 +125,7 @@ export const Provider = (props: PropsWithChildren<{}>) => {
     completeTodo,
     activeTodo,
     removeTodo,
+    editTodo,
     changeFilter,
   };
 

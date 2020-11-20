@@ -3,9 +3,17 @@
 }
 
 .container {
-  margin-right: auto;
-  margin-left: auto;
-  padding-right: 1rem;
-  padding-left: 1rem;
+  margin: 0 auto;
+  padding: 0 1rem;
   max-width: 800px;
 }
+
+.mui-font {
+  font-family: Montserrat, sans-serif !important;
+}
+
+.MuiInput-root {
+  width: 600px !important;
+  color: #4A5568 !important;
+}
+
