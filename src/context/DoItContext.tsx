@@ -58,39 +58,31 @@ export const Provider = (props: PropsWithChildren<{}>) => {
   const activeTodos = todosAll.filter(todo => !todo.completed);
   const completedTodos = todosAll.filter(todo => todo.completed);
 
+  const newTodosAll = (todo: Todo) => {
+    setTodosAll((currentTodosAll) => {
+      const todoIndex = currentTodosAll.findIndex(e => e.id === todo.id);
+      if (todoIndex < 0) {
+        throw new Error('Index not found');
+      }
+      const newTodosAll = [...currentTodosAll];
+      newTodosAll[todoIndex] = todo;
+      return newTodosAll;
+    });
+  }
+
   const addNewTodo: Context['addNewTodo'] = (task) => {
-    const newTodo = {id: Date.now(), task: task, completed: false};
+    const newTodo = {id: Date.now(), task, completed: false};
     setTodosAll([...todosAll, newTodo]);
   };
 
   const completeTodo: Context['completeTodo'] = (id, task) => {
-    const completedTodo = {id: id, task: task, completed: true};
-
-    setTodosAll((currentTodosAll) => {
-      const completedTodoIndex = currentTodosAll.findIndex(todo => todo.id === id);
-      if (completedTodoIndex < 0) {
-        throw new Error('Index not found');
-      }
-
-      const newTodosAll = [...currentTodosAll];
-      newTodosAll[completedTodoIndex] = completedTodo;
-      return newTodosAll;
-    });
+    const completedTodo = {id, task, completed: true};
+    newTodosAll(completedTodo)
   };
 
   const activeTodo: Context['activeTodo'] = (id, task) => {
-    const activatedTodo = {id: id, task: task, completed: false};
-
-    setTodosAll((currentTodosAll) => {
-      const activatedTodoIndex = currentTodosAll.findIndex(todo => todo.id === id);
-      if (activatedTodoIndex < 0) {
-        throw new Error('Index not found');
-      }
-
-      const newTodosAll = [...currentTodosAll];
-      newTodosAll[activatedTodoIndex] = activatedTodo;
-      return newTodosAll;
-    })
+    const activatedTodo = {id, task, completed: false};
+    newTodosAll(activatedTodo)
   };
 
   const removeTodo: Context['removeTodo'] = (id) => {
@@ -100,15 +92,10 @@ export const Provider = (props: PropsWithChildren<{}>) => {
   const editTodo: Context['editTodo'] = (id, task) => {
     setTodosAll((currentTodosAll) => {
       const editedTodoIndex = currentTodosAll.findIndex(todo => todo.id === id);
-      if (editedTodoIndex < 0) {
-        throw new Error('Index not found');
-      }
-
       const newTodosAll = [...currentTodosAll];
       newTodosAll[editedTodoIndex].task = task;
       return newTodosAll;
     })
-
   }
 
   const changeFilter: Context['changeFilter'] = (filter) => {
